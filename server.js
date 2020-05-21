@@ -5,11 +5,19 @@ const app = express()
  let User=  require('./Model/user')
 var cors = require('cors')
 var bodyParser = require('body-parser')
+
+
+
  
 const port = 4000
 app.use(cors())
 app.use(bodyParser.json())
 
+//Signup User
+  app.use(require('./api/Signup/signup'))
+  
+  //Login User
+  app.use(require('./api/login/login'))
 
 
 
@@ -24,22 +32,6 @@ app.use(bodyParser.json())
 
 
 
-
- app.post('/user',(req,res)=>{
-
-     var signup = new User(req.body)
-
-      signup.save((err,data)=>{
-        if (err) {
-          return res.json({ success: false, err: err });
-        }
-
-        res.json({ success: true, data: data });
-      });
-
-
- 
- })
 
  
  app.post('/login',(req,res)=>{
@@ -56,6 +48,7 @@ app.use(bodyParser.json())
       return res.json({ success: false, data: "User  is not Found" });
     }
   });
+})
 
   //  User.save((err,data)=>{
   //    if (err) {
@@ -66,7 +59,7 @@ app.use(bodyParser.json())
   //
 
 
-})
+
 app.get('/', (req, res) => res.send('Hello World!'))
 
 app.listen(port, () => console.log(`Server is running at:${port}`))

@@ -66,20 +66,20 @@ export default function SignIn() {
   }
 const loginHundler=(e)=>{
     e.preventDefault()
-   if(state.email==undefined)
+   if(state.Email===undefined)
 
    {
    
-    Alert.error('please Enter Passwor Carefully!', {
+    Alert.error('please Enter Email Carefully!', {
       position: 'top',
         effect: 'bouncyflip',
         timeout: 'none'
     });
 
    }
-   else if(state.password==undefined){
+   else if(state.Password===undefined){
 
-      Alert.error('please Enter Passwor Carefully!', {
+      Alert.error('please Enter Password Carefully!', {
         position: 'top',
           effect: 'bouncyflip',
           timeout: 'none'
@@ -93,12 +93,14 @@ else{
      
     )
     .then((res)=>{
+      
        if(res.data.success==true)
        {
         history.push({
             pathname:  "/dashboard",
         })
 
+         console.log(res)
         Alert.success(' Sussfully! you have login', {
           position: 'right',
           effect: 'bouncyflip',
@@ -132,7 +134,7 @@ else{
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Alert stack={{limit: 3}} />
+        <Alert stack={{limit: 1}} />
         <form className={classes.form} noValidate>
           <TextField
             variant="outlined"
